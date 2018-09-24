@@ -22,24 +22,24 @@ RUN apt-get update && apt-get install -y \
     libgoogle-glog-dev \
     libgflags-dev \
     libglew-dev \
-    libqt5opengl5-dev \
     libcgal-dev
 
 RUN apt-get update && apt-get install -y dpkg wget
 
 RUN mkdir /tools
 
-# install ceres-solver
+# qtbase5-dev on ubuntu14.04 is not compatible
+# we download qtbase5-dev from ubuntu16.04 repo
 
 WORKDIR /tools
-RUN apt-get update && apt-get install -y libatlas-base-dev libsuitesparse-dev
-RUN git clone https://ceres-solver.googlesource.com/ceres-solver
-WORKDIR /tools/ceres-solver
-RUN git checkout $(git describe --tags)
-RUN mkdir build
-WORKDIR /tools/ceres-solver/build
-RUN cmake .. -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF
-RUN make -j4 && make install
+RUN wget -nv -O qt5.5.deb http://mirrors.kernel.org/ubuntu/pool/main/q/qtbase-opensource-src/qtbase5-dev_5.5.1+dfsg-16ubuntu7_amd64.deb
+RUN dpkg -i qt5.5.deb
+RUN apt-get update && apt-get install -y qtbase5-dev
+
+RUN wget -nv -O qt5opengl5.5.deb http://mirrors.kernel.org/ubuntu/pool/main/q/qtbase-opensource-src/libqt5opengl5-dev_5.5.1+dfsg-16ubuntu7_amd64.deb
+RUN dpkg -i qt5opengl5.5.deb
+RUN apt-get update && apt-get install -y libqt5opengl5-dev
+
 
 # install cuda 8.0
 
@@ -53,13 +53,17 @@ RUN wget -nv -O cuda8.0_patch.deb https://developer.nvidia.com/compute/cuda/8.0/
 RUN dpkg -i cuda8.0_patch.deb
 RUN apt-get update && apt-get install -y --no-install-recommends cuda
 
-# qtbase5-dev on ubuntu14.04 is not compatible
-# we download qtbase5-dev from ubuntu16.04
+# install ceres-solver
 
 WORKDIR /tools
-RUN wget -nv -O qt5.5.deb http://mirrors.kernel.org/ubuntu/pool/main/q/qtbase-opensource-src/qtbase5-dev_5.5.1+dfsg-16ubuntu7_amd64.deb
-RUN dpkg -i qt5.5.deb
-RUN apt-get update && apt-get install -y qtbase5-dev
+RUN apt-get update && apt-get install -y libatlas-base-dev libsuitesparse-dev
+RUN git clone https://ceres-solver.googlesource.com/ceres-solver
+WORKDIR /tools/ceres-solver
+RUN git checkout $(git describe --tags)
+RUN mkdir build
+WORKDIR /tools/ceres-solver/build
+RUN cmake .. -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF
+RUN make -j4 && make install
 
 # install colmap
 
