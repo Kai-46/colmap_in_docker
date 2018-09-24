@@ -87,9 +87,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 ENV LIBRARY_PATH /usr/local/cuda/lib64/stubs
 
-# ENV CUDA_HOME /usr/local/cuda
-# ENV LD_LIBRARY_PATH $CUDA_HOME/lib64
-RUN env
+ENV CUDA_HOME /usr/local/cuda
+ENV LD_LIBRARY_PATH $CUDA_HOME/lib64
 
 # install colmap
 
@@ -105,3 +104,7 @@ RUN make && make install
 WORKDIR /tools
 RUN chmod -R 777 /tools
 
+ENV HOSTNAME colmap-in-docker
+RUN mkdir /home
+RUN chmod -R 777 /home
+ENV HOME /home
