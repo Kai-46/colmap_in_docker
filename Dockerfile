@@ -24,8 +24,9 @@ RUN apt-get update && apt-get install -y \
     libglew-dev \
     qtbase5-dev \
     libqt5opengl5-dev \
-    libcgal-dev \
-    dpkg
+    libcgal-dev
+
+RUN apt-get update && apt-get install -y dpkg wget
 
 RUN mkdir /tools
 
@@ -44,14 +45,14 @@ RUN make -j4 && make install
 # install cuda 8.0
 
 WORKDIR /tools
-RUN wget https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda-repo-ubuntu1404-8-0-local-ga2_8.0.61-1_amd64-deb
-RUN dpkg -i cuda-repo-ubuntu1404-8-0-local-ga2_8.0.61-1_amd64.deb
-RUN apt-get update && apt-get install cuda
+RUN wget -nv --content-disposition -O cuda8.0.deb https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda-repo-ubuntu1404-8-0-local-ga2_8.0.61-1_amd64-deb
+RUN dpkg -i cuda8.0.deb
+RUN apt-get update && apt-get install -y cuda
 
 # install cuda update patch
-RUN wget https://developer.nvidia.com/compute/cuda/8.0/Prod2/patches/2/cuda-repo-ubuntu1404-8-0-local-cublas-performance-update_8.0.61-1_amd64-deb
-RUN dpkg -i cuda-repo-ubuntu1404-8-0-local-cublas-performance-update_8.0.61-1_amd64.deb
-RUN apt-get update && apt-get install cuda
+RUN wget -nv --content-disposition -O cuda8.0_patch.deb https://developer.nvidia.com/compute/cuda/8.0/Prod2/patches/2/cuda-repo-ubuntu1404-8-0-local-cublas-performance-update_8.0.61-1_amd64-deb
+RUN dpkg -i cuda8.0_patch.deb
+RUN apt-get update && apt-get install -y cuda
 
 # install colmap
 
