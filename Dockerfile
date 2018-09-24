@@ -53,7 +53,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates
     echo "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64 /" > /etc/apt/sources.list.d/cuda.list
 
 ENV CUDA_VERSION 8.0.61
-
 ENV CUDA_PKG_VERSION 8-0=$CUDA_VERSION-1
 RUN apt-get update && apt-get install -y --no-install-recommends \
         cuda-nvrtc-$CUDA_PKG_VERSION \
@@ -68,6 +67,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ln -s cuda-8.0 /usr/local/cuda && \
     rm -rf /var/lib/apt/lists/*
 
+ENV CUDA_HOME /usr/local/cuda
+ENV LD_LIBRARY_PATH $CUDA_HOME/lib64
+RUN env
 # install colmap
 
 WORKDIR /tools
