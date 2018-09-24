@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:16.04
 
 LABEL maintainer="Kai Zhang"
 
@@ -22,24 +22,27 @@ RUN apt-get update && apt-get install -y \
     libglew-dev \
     qtbase5-dev \
     libqt5opengl5-dev \
-    libcgal-dev
+    libcgal-dev \
+    libcgal-qt5-dev
 
 RUN mkdir /tools
 
+WORKDIR /tools
 RUN apt-get update && apt-get install -y libatlas-base-dev libsuitesparse-dev
-RUN cd /tools
 RUN git clone https://ceres-solver.googlesource.com/ceres-solver
-RUN cd ceres-solver
+WORKDIR /tools/ceres-solver
 RUN git checkout $(git describe --tags)
-RUN mkdir build && cd build
+RUN mkdir build
+WORKDIR /tools/ceres-solver/build
 RUN cmake .. -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF
 RUN make && make install
 
-RUN cd /tools
+WORKDIR /tools
 RUN git clone https://github.com/colmap/colmap.git
-RUN cd colmap
+WORKDIR /tools/colmap
 RUN git checkout dev
-RUN mkdir build && cd build
+RUN mkdir build
+WORKDIR /tools/colmap/build
 RUN cmake ..
 RUN make && make install
 
