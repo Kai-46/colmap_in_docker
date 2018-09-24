@@ -105,6 +105,6 @@ WORKDIR /tools
 RUN chmod -R 777 /tools
 
 ENV HOSTNAME colmap-in-docker
-RUN mkdir /home
+# RUN mkdir /home
 RUN chmod -R 777 /home
 ENV HOME /home
