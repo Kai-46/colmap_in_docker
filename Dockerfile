@@ -47,12 +47,12 @@ RUN make -j4 && make install
 WORKDIR /tools
 RUN wget -nv --content-disposition -O cuda8.0.deb https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda-repo-ubuntu1404-8-0-local-ga2_8.0.61-1_amd64-deb
 RUN dpkg -i cuda8.0.deb
-RUN apt-get update && apt-get install -y cuda
+RUN apt-get update && apt-get install -y --no-install-recommends cuda
 
 # install cuda update patch
 RUN wget -nv --content-disposition -O cuda8.0_patch.deb https://developer.nvidia.com/compute/cuda/8.0/Prod2/patches/2/cuda-repo-ubuntu1404-8-0-local-cublas-performance-update_8.0.61-1_amd64-deb
 RUN dpkg -i cuda8.0_patch.deb
-RUN apt-get update && apt-get install -y cuda
+RUN apt-get update && apt-get install -y --no-install-recommends cuda
 
 # install colmap
 
