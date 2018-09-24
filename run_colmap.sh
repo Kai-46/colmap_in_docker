@@ -16,8 +16,9 @@ NVIDIA_OPTIONS="--device /dev/nvidia0:/dev/nvidia0 \
 --device /dev/nvidia1:/dev/nvidia1 \
 --device /dev/nvidiactl:/dev/nvidiactl \
 --device /dev/nvidia-uvm:/dev/nvidia-uvm \
---device /dev/nvidia-uvm-tools:/dev/nvidia-uvm-tools \
--v /usr/local/cuda-8.0:/usr/local/cuda-8.0"
+--device /dev/nvidia-uvm-tools:/dev/nvidia-uvm-tools"
+
+# -v /usr/local/cuda-8.0:/usr/local/cuda-8.0
 
 # echo "starting container with uid: ${USER_ID}..."
 # echo "host volume '/phoenix' has been mounted..."
