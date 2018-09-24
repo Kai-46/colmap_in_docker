@@ -43,6 +43,9 @@ RUN make && make install
 
 # install cuda 8.0
 
+ENV CUDA_VERSION 8.0.61
+ENV CUDA_PKG_VERSION 8-0=$CUDA_VERSION-1
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
         cuda-core-$CUDA_PKG_VERSION \
         cuda-misc-headers-$CUDA_PKG_VERSION \
