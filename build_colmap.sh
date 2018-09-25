@@ -2,4 +2,4 @@
 
 # build locally a docker image that contains colmap
 
-docker build -t kai-46/colmap:latest .
+docker build -t kai46/colmap:latest .
