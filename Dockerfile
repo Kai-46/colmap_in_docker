@@ -36,13 +36,11 @@ RUN mkdir /tools
 
 WORKDIR /tools
 RUN wget -nv -O cuda8.0.deb https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64-deb
-RUN dpkg -i cuda8.0.deb
-RUN apt-get update && apt-get install -y --no-install-recommends cuda
+RUN dpkg -i cuda8.0.deb && apt-get update && apt-get install -y --no-install-recommends cuda
 
 # install cuda update patch
 RUN wget -nv -O cuda8.0_patch.deb https://developer.nvidia.com/compute/cuda/8.0/Prod2/patches/2/cuda-repo-ubuntu1604-8-0-local-cublas-performance-update_8.0.61-1_amd64-deb
-RUN dpkg -i cuda8.0_patch.deb
-RUN apt-get update && apt-get install -y --no-install-recommends cuda
+RUN dpkg -i cuda8.0_patch.deb && apt-get update && apt-get install -y --no-install-recommends cuda
 
 # install ceres-solver
 
