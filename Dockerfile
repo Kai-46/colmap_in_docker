@@ -71,7 +71,6 @@ RUN make -j4 && make install
 # remove unneeded files
 RUN rm -rf /tools
 
-ENV HOSTNAME colmap-in-docker
 # RUN mkdir /home
 RUN chmod -R 777 /home
 ENV HOME /home
