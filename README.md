@@ -12,3 +12,4 @@ The workflow is as below:
 
 Feel free to modify the Dockerfile and the two handy scripts yourlf. Inside the 'reference' folder, there are two Dockerfiles provided by NVIDIA. I was referencing them to figure out how to install CUDA.
  
+There's also a pre-built docker image hosted on DcokerHub. Run 'docker pull kai46/colmap:latest' to pull the image to your local machine.
