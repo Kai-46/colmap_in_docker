@@ -12,14 +12,6 @@
 USER_ID=$(id -u)
 # CONTAINER_NAME=${USER}_$(date +%m%d_%H%m%S)
 
-NVIDIA_OPTIONS="--device /dev/nvidia0:/dev/nvidia0 \
---device /dev/nvidia1:/dev/nvidia1 \
---device /dev/nvidiactl:/dev/nvidiactl \
---device /dev/nvidia-uvm:/dev/nvidia-uvm \
---device /dev/nvidia-uvm-tools:/dev/nvidia-uvm-tools"
-
-# -v /usr/local/cuda-8.0:/usr/local/cuda-8.0"
-
 # echo "starting container with uid: ${USER_ID}..."
 # echo "host volume '/phoenix' has been mounted..."
 # echo "this container has the same permission access to the mounted host volumes as ${USER} (uid: ${USER_ID})"
@@ -28,7 +20,7 @@ docker run \
 	-u ${USER_ID} \
 	--userns="host" \
     --entrypoint="" \
-    $NVIDIA_OPTIONS \
+    --runtime=nvidia \
 	-v /phoenix:/phoenix \
 	-v /etc/localtime:/etc/localtime:ro \
 	kai46/colmap:latest \

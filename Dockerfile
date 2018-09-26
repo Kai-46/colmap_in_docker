@@ -1,15 +1,22 @@
-FROM nvidia/cuda:8.0-devel
+FROM nvidia/cuda:8.0-devel-ubuntu16.04
 
 LABEL maintainer="Kai Zhang"
 
 ARG DEBIAN_FRONTEND=non-interactive
 
+# update sources.list
+# RUN echo "deb http://mirror.math.princeton.edu/pub/ubuntu/ xenial main \ 
+# deb-src http://mirror.math.princeton.edu/pub/ubuntu/ xenial main" > /etc/apt/sources.list 
+
 # install general dependencies
 
+# RUN apt-get update && apt-get install apt-transport-https
 RUN apt-get update && apt-get install -y \
     git \
     cmake \
-    build-essential \
+    build-essential
+
+RUN apt-get update && apt-get install -y \
     libboost-program-options-dev \
     libboost-filesystem-dev \
     libboost-graph-dev \
@@ -21,7 +28,9 @@ RUN apt-get update && apt-get install -y \
     libfreeimage-dev \
     libgoogle-glog-dev \
     libgflags-dev \
-    libglew-dev \
+    libglew-dev
+
+RUN apt-get update && apt-get install -y \
     qtbase5-dev \
     libqt5opengl5-dev \
     libcgal-dev \
