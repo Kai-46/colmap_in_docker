@@ -2,6 +2,7 @@
 
 This github repo aims to install colmap inside a docker with CUDA suport.
 
+Prerequites: make sure ![docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/) and ![nvidia-docker2](https://github.com/NVIDIA/nvidia-docker) are installed on your system. And also make sure that the nvidia driver installed on your system is compatible with cuda-8.0; otherwise you need to modify the base image in the Dockerfile.
 
 The workflow is as below:
 * switch to the directory 'colmap_in_docker' after you git-clone the repo
