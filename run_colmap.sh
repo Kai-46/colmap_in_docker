@@ -19,7 +19,6 @@ docker run \
     -ti --rm \
 	-u ${USER_ID} \
 	--userns="host" \
-    --entrypoint="" \
     --runtime=nvidia \
 	-v /phoenix:/phoenix \
 	-v /etc/localtime:/etc/localtime:ro \
