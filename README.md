@@ -7,7 +7,7 @@ Prerequites: make sure [docker](https://docs.docker.com/install/linux/docker-ce/
 The workflow is as below:
 * switch to the directory 'colmap_in_docker' after you git-clone the repo
 * run './build_colmap.sh'; this build a docker image called 'kai46/colmap:latest' on your local machine
-* run './run_colmap.sh'; this will launch a container and lead you to the bash; the script takes care of mapping host user id, and mounting host volume into the newly launched container
+* run './run_colmap.sh'; this will launch a container and lead you to a interactive bash; the script takes care of mapping host user id, and mounting host volume into the newly launched container; this script is tailored to the phoenix cluster at Cornell, and by default, it mounts the '/phoenix' directory into the launched container; feel free to modify it for your own purposes. 
 * enjoy
 
 Feel free to modify the Dockerfile and the two handy scripts yourlf. Inside the 'reference' folder, there are two Dockerfiles provided by NVIDIA. I was referencing them to figure out how to install CUDA.
