@@ -4,17 +4,13 @@ LABEL maintainer="Kai Zhang"
 
 ARG DEBIAN_FRONTEND=non-interactive
 
-# update sources.list
-# RUN echo "deb http://mirror.math.princeton.edu/pub/ubuntu/ xenial main \ 
-# deb-src http://mirror.math.princeton.edu/pub/ubuntu/ xenial main" > /etc/apt/sources.list 
-
 # install general dependencies
 
-# RUN apt-get update && apt-get install apt-transport-https
 RUN apt-get update && apt-get install -y \
     git \
     cmake \
-    build-essential
+    build-essential \
+    vim
 
 RUN apt-get update && apt-get install -y \
     libboost-program-options-dev \
@@ -60,9 +56,6 @@ RUN mkdir build
 WORKDIR /tools/colmap/build
 RUN cmake ..
 RUN make -j4 && make install
-
-# WORKDIR /tools
-# RUN chmod -R 777 /tools
 
 # remove unneeded files
 RUN rm -rf /tools
