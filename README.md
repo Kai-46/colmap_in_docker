@@ -1,4 +1,4 @@
-# colmap-in-docker
+# colmap_in_docker
 
 This github repo aims to help you build a docker image with colmap residing in.
 
